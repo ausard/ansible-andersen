@@ -1,0 +1,25 @@
+[all:vars]
+env=staging
+
+
+[local-server]
+192.168.132.23
+[local-server:vars]
+# ansible_ssh_user={{user}}
+ansible_user={{user}}
+# ansible_password={{passwd}}
+ansible_private_key_file={{key}}
+
+[aws]
+18.196.135.201
+[aws:vars]
+ansible_user={{user}}
+ansible_private_key_file={{key}}
+
+[andersen]
+116.202.124.176
+[andersen:vars]
+# ansible_ssh_user={{user}}
+ansible_user={{user}}
+# ansible_password={{passwd}}
+ansible_private_key_file={{key}}

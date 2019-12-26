@@ -1,0 +1,28 @@
+---
+- name: Ansible homework at Andersen local-server
+  hosts: local-server
+
+  tasks:
+    - name: Information
+      debug:
+        msg: "This is tasks"
+    - name: Ping
+      ping:
+    - name: Copy file
+      copy:
+        src: ansible.pdf
+        dest: ~/ansible.pdf
+
+- name: Ansible homework at Andersen local-server
+  hosts: aws, andersen
+
+  tasks:
+    - name: Information
+      debug:
+        msg: "This is tasks"
+    - name: Ping
+      ping:
+    - name: Copy file
+      copy:
+        src: ansible.pdf
+        dest: ~/ansible.pdf

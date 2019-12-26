@@ -1,0 +1,9 @@
+---
+- name: Playbook
+  hosts: all
+  become: yes
+  tasks:
+    - name: Copy file with owner and permissions
+      copy:
+        src: ansible.pdf
+        dest: ~/ansible.pdf
