@@ -27,7 +27,10 @@
   apt: update_cache=yes name={{ item }} state=latest
   loop: [ 'docker-ce', 'docker-compose']
   when: ansible_facts['os_family'] == "Debian"
-
+  
+- name: Install Docker Module for Python
+      pip:
+        name: docker
 
 # CentOS
 

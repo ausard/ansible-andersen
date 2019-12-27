@@ -1,6 +1,6 @@
 ---
 - name: Ansible homework at cloud-server:AWS
-  hosts: aws
+  hosts: vagrant
   become: yes
   vars_files:
     - pass.yml

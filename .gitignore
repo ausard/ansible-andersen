@@ -1,2 +1,4 @@
 *.retry
 inventory/*.pem
+.vagrant/
+*.log
