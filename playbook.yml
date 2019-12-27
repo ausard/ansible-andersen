@@ -1,9 +1,43 @@
 ---
-- name: Playbook
-  hosts: all
+- name: Ansible homework at cloud-server:AWS
+  hosts: aws
   become: yes
+  vars_files:
+    - pass.yml
+  environment:
+    POSTGRES_PASSWORD: "{{POSTGRES_PASSWORD}}"
+    PGADMIN_DEFAULT_EMAIL: "{{PGADMIN_DEFAULT_EMAIL}}"
+    PGADMIN_DEFAULT_PASSWORD: "{{PGADMIN_DEFAULT_PASSWORD}}"
+  roles:
+  - role: docker
+
   tasks:
-    - name: Copy file with owner and permissions
-      copy:
-        src: ansible.pdf
-        dest: ~/ansible.pdf
+
+  - name: Create a network for containers
+    docker_network:
+      name: ps
+
+  - name: Launch database container
+    docker_container:
+      name: db
+      image: postgres
+      restart: yes
+      env:
+        POSTGRES_PASSWORD: "{{ ansible_env.POSTGRES_PASSWORD }}"
+      ports:
+        - 5432:5432
+      networks:
+        - name: ps
+
+  - name: Launch pgAdmin container
+    docker_container:
+      name: pgadmin
+      image: dpage/pgadmin4
+      restart: yes
+      env:
+        PGADMIN_DEFAULT_EMAIL: "{{ ansible_env.PGADMIN_DEFAULT_EMAIL }}"
+        PGADMIN_DEFAULT_PASSWORD: "{{ ansible_env.PGADMIN_DEFAULT_PASSWORD }}"
+      ports:
+        - 5050:80
+      networks:
+        - name: ps

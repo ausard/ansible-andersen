@@ -1,2 +1,2 @@
 user: ubuntu
-key: /mnt/work/Projects/DevOps/andersen/ansible/inventory/ausard-frankfurt.pem
+key: inventory/ausard-frankfurt.pem
