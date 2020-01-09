@@ -1,2 +1,3 @@
 user: ausard
 key: ~/.ssh/id_rsa
+env: testing

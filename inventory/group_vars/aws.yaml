@@ -1,2 +1,3 @@
 user: ubuntu
 key: inventory/ausard-frankfurt.pem
+env: production

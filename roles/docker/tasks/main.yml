@@ -3,11 +3,18 @@
 # Debian
 
 - name: Install aptitude using apt
-  apt: name=aptitude state=latest update_cache=yes force_apt_get=yes
+  apt: 
+    name: aptitude
+    state: latest
+    update_cache: yes
+    force_apt_get: yes
   when: ansible_facts['os_family'] == "Debian"
 
 - name: Install required system packages
-  apt: name={{ item }} state=latest update_cache=yes
+  apt:
+    name: {{ item }}
+    state: latest
+    update_cache: yes
   loop: [ 'apt-transport-https', 'ca-certificates', 'curl', 'software-properties-common', 'python3-pip', 'virtualenv', 'python3-setuptools']
   when: ansible_facts['os_family'] == "Debian"
 
@@ -24,19 +31,24 @@
   when: ansible_facts['os_family'] == "Debian"
 
 - name: Update apt and install docker-ce
-  apt: update_cache=yes name={{ item }} state=latest
+  apt:
+    update_cache: yes
+    name: {{ item }}
+    state: latest
   loop: [ 'docker-ce', 'docker-compose']
   when: ansible_facts['os_family'] == "Debian"
   
 - name: Install Docker Module for Python
-      pip:
-        name: docker
-
+  pip:
+    name: docker
+  when: ansible_facts['os_family'] == 'Debian'
 # CentOS
 
 
 - name: Install utils
-  yum: name={{ item }} state=latest
+  yum: 
+    name: {{ item }}
+    state: latest
   loop: ['yum-utils', 'device-mapper-persistent-data', 'lvm2']
   when: ansible_facts['distribution'] == "CentOS"
 
@@ -48,6 +60,9 @@
   when: ansible_facts['distribution'] == "CentOS"
 
 - name: Install Docker
-  package: name={{ item }} state=latest become=yes
+  yum:
+    name: {{ item }}
+    state: latest 
+    become: yes
   loop: ['docker-ce', 'docker-compose']
   when: ansible_facts['distribution'] == "CentOS"
