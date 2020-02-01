@@ -15,7 +15,7 @@
     name: {{ item }}
     state: latest
     update_cache: yes
-  loop: [ 'apt-transport-https', 'ca-certificates', 'curl', 'software-properties-common', 'python3-pip', 'virtualenv', 'python3-setuptools']
+    loop: [ 'apt-transport-https', 'ca-certificates', 'curl', 'software-properties-common', 'python3-pip', 'virtualenv', 'python3-setuptools']
   when: ansible_facts['os_family'] == "Debian"
 
 - name: Add Docker GPG apt Key
@@ -35,7 +35,7 @@
     update_cache: yes
     name: {{ item }}
     state: latest
-  loop: [ 'docker-ce', 'docker-compose']
+    loop: [ 'docker-ce', 'docker-compose']
   when: ansible_facts['os_family'] == "Debian"
   
 - name: Install Docker Module for Python
@@ -49,7 +49,7 @@
   yum: 
     name: {{ item }}
     state: latest
-  loop: ['yum-utils', 'device-mapper-persistent-data', 'lvm2']
+    loop: ['yum-utils', 'device-mapper-persistent-data', 'lvm2']
   when: ansible_facts['distribution'] == "CentOS"
 
 - name: Add Docker repo
@@ -60,9 +60,9 @@
   when: ansible_facts['distribution'] == "CentOS"
 
 - name: Install Docker
-  yum:
+  yum:ll
     name: {{ item }}
     state: latest 
     become: yes
-  loop: ['docker-ce', 'docker-compose']
+    loop: ['docker-ce', 'docker-compose']
   when: ansible_facts['distribution'] == "CentOS"
