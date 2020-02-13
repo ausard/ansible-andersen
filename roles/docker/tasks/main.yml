@@ -60,7 +60,7 @@
   when: ansible_facts['distribution'] == "CentOS"
 
 - name: Install Docker
-  yum:ll
+  yum:
     name: {{ item }}
     state: latest 
     become: yes
